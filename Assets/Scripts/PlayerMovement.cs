@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-
+using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
+    public List<GameObject> redColor;
     public GameObject obstacleprefab;
     public Rigidbody rb;
-
+  
 
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
@@ -16,16 +17,21 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(obstacleprefab, transform.position + Vector3.forward, Quaternion.identity);
     }*/
 
-      /* is called once per frame
-    void Update()
+    /* is called once per frame
+  void Update()
+  {
+      rb.AddForce(0, 0, 200);
+  }*/
+    private void OnCollisionEnter(Collision collision)
     {
-        rb.AddForce(0, 0, 200);
-    }*/
+        // collision.gameObject.GetComponent<StackableObj>
+        GetComponent<Renderer>().material.color = Color.blue/&;
+    }
 
 
     void FixedUpdate()
     {  
-        // Addd a forward force variable so that it can be manipulated over Unity Engine.
+        // Add a forward force variable so that it can be manipulated over Unity Engine.
         rb.AddForce(0, 0, forwardForce * Time.deltaTime);
 
         if ( Input.GetKey("d"))
